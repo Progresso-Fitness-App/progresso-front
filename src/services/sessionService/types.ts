@@ -1,9 +1,14 @@
 export type ErrorResponse = {
-  error: string
-}
+  error: string;
+};
 
 export type SuccessfulLoginResponse = {
-  userId: string
+  userId: string;
+};
+
+export type SuccessfulRegisterResponse = {
+  message: string;
 };
 
 export type LoginResponse = ErrorResponse | SuccessfulLoginResponse;
+export type RegisterResponse = ErrorResponse | SuccessfulRegisterResponse;
