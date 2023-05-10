@@ -1,6 +1,8 @@
-import { ChangeEvent, useMemo, useState } from 'react';
+import { ChangeEvent, useId, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sessionService } from '@/services';
+import { TextInput, Button } from '@tremor/react';
+
 
 export const RegisterView = (): JSX.Element => {
   const navigate = useNavigate();
@@ -43,6 +45,10 @@ export const RegisterView = (): JSX.Element => {
       .catch((e) => setError(e.message));
   };
 
+  const usernameId = useId(),
+    passwordId = useId(),
+    emailId = useId();
+
   return (
     <div className="h-screen flex flex-col items-center justify-center">
       {error && (
@@ -50,33 +56,35 @@ export const RegisterView = (): JSX.Element => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
+        <label className='text-sm text-gray-700' htmlFor={usernameId}>Username</label>
+        <TextInput
+          id={usernameId}
           name="username"
-          className="border"
+          placeholder="Username..."
           onChange={handleUsernameChange}
         />
-        <label htmlFor="email">Email</label>
-        <input
+        <label className='text-sm text-gray-700' htmlFor={emailId}>Email</label>
+        <TextInput
+          id={emailId}
           name="email"
-          type="email"
-          className="border"
+          placeholder="Email..."
           onChange={handleEmailChange}
         />
-        <label htmlFor="password">Password</label>
-        <input
-          className="border"
+        <label className='text-sm text-gray-700' htmlFor={passwordId}>Password</label>
+        <TextInput
+          id={passwordId}
           type="password"
-          onChange={handlePasswordChange}
           name="password"
+          placeholder="Password..."
+          onChange={handlePasswordChange}
         />
-        <button
-          className="border enabled:bg-gray-100"
+        <Button
+          className="mt-2"
           type="submit"
           disabled={!isFormEnabled}
         >
           Register
-        </button>
+        </Button>
       </form>
     </div>
   );

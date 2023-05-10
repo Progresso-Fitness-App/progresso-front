@@ -1,6 +1,7 @@
-import { ChangeEvent, useMemo, useState } from "react";
+import { ChangeEvent, useId, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { sessionService } from "@/services";
+import { TextInput, Button } from '@tremor/react';
 
 export const LoginView = (): JSX.Element => {
   const navigate = useNavigate();
@@ -36,14 +37,19 @@ export const LoginView = (): JSX.Element => {
     }).catch(e => setError(e.message));
   }
 
+  const usernameId = useId(),
+    passwordId = useId();
+
 
   return <div className="h-screen flex items-center justify-center">
     {error && <p className="absolute inset-x-0 top-0 bg-red-500 p-2">{error}</p>}
 
     <form onSubmit={handleSubmit}>
-      <input className="border" onChange={handleUsernameChange} />
-      <input className="border" type="password" onChange={handlePasswordChange} />
-      <button className="border enabled:bg-gray-100" type="submit" disabled={!isFormEnabled}>Submit</button>
+      <label className='text-sm text-gray-700' htmlFor={usernameId}>Username</label>
+      <TextInput id={usernameId} placeholder="Username..." onChange={handleUsernameChange} />
+      <label className='text-sm text-gray-700' htmlFor={passwordId}>Password</label>
+      <TextInput id={passwordId} placeholder="Password..." type="password" onChange={handlePasswordChange} />
+      <Button className="mt-2" type="submit" disabled={!isFormEnabled}>Submit</Button>
     </form>
   </div>
 };
