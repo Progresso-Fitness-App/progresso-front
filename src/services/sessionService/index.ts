@@ -1,7 +1,7 @@
-import { IAPIResponse } from "@/base/api/types"
-import { POST } from "@/base/api"
+import type { IAPIResponse } from "@/base/api/types"
+import type { LoginResponse } from "./types"
 
-import { LoginResponse } from "./types"
+import { POST } from "@/base/api"
 
 interface ISessionService {
   login: (username: string, password: string) => Promise<IAPIResponse<LoginResponse>>
