@@ -3,7 +3,7 @@ export type ErrorResponse = {
 };
 
 export type SuccessfulRegisterResponse = {
-  userId: string;
+  message: string;
 };
 
 export type RegisterResponse = ErrorResponse | SuccessfulRegisterResponse;

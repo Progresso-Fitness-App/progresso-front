@@ -35,7 +35,7 @@ export const RegisterView = (): JSX.Element => {
       .register(username, email, password)
       .then(({ statusCode, statusText, data }) => {
         if (data) {
-          'message' in data ? setError(data.message) : navigate('/dashboard');
+          'error' in data ? setError(data.error) : setError('Success');
         } else {
           setError(`${statusCode}: ${statusText}`);
         }
