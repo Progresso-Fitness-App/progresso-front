@@ -2,6 +2,7 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { LoginView } from "@/views/login.tsx";
 
 const router = createBrowserRouter([
   {
@@ -9,8 +10,8 @@ const router = createBrowserRouter([
     element: <div>index</div>,
   },
   {
-    path: "about",
-    element: <div>About</div>,
+    path: "login",
+    element: <LoginView />,
   },
 ]);
 
