@@ -1,7 +1,11 @@
 import type { IAPIResponse } from '@/base/api/types';
-import type { LoginResponse, RegisterResponse } from './types';
+import type {
+  LoginResponse,
+  RegisterResponse,
+  UserDataResponse,
+} from './types';
 
-import { POST } from '@/base/api';
+import { GET, POST } from '@/base/api';
 
 interface ISessionService {
   login: (
@@ -14,6 +18,8 @@ interface ISessionService {
     email: string,
     password: string
   ) => Promise<IAPIResponse<RegisterResponse>>;
+
+  getUserData: () => Promise<IAPIResponse<UserDataResponse>>;
 }
 
 export const sessionService: ISessionService = {
@@ -29,4 +35,6 @@ export const sessionService: ISessionService = {
       email,
       password,
     }),
+
+  getUserData: () => GET<UserDataResponse>('/api/me'),
 };

@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { sessionService } from '@/services';
 import { TextInput, Button } from '@tremor/react';
 
-
-export const RegisterView = (): JSX.Element => {
+const RegisterView = (): JSX.Element => {
   const navigate = useNavigate();
 
   //define variables
@@ -56,21 +55,27 @@ export const RegisterView = (): JSX.Element => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <label className='text-sm text-gray-700' htmlFor={usernameId}>Username</label>
+        <label className="text-sm text-gray-700" htmlFor={usernameId}>
+          Username
+        </label>
         <TextInput
           id={usernameId}
           name="username"
           placeholder="Username..."
           onChange={handleUsernameChange}
         />
-        <label className='text-sm text-gray-700' htmlFor={emailId}>Email</label>
+        <label className="text-sm text-gray-700" htmlFor={emailId}>
+          Email
+        </label>
         <TextInput
           id={emailId}
           name="email"
           placeholder="Email..."
           onChange={handleEmailChange}
         />
-        <label className='text-sm text-gray-700' htmlFor={passwordId}>Password</label>
+        <label className="text-sm text-gray-700" htmlFor={passwordId}>
+          Password
+        </label>
         <TextInput
           id={passwordId}
           type="password"
@@ -78,14 +83,12 @@ export const RegisterView = (): JSX.Element => {
           placeholder="Password..."
           onChange={handlePasswordChange}
         />
-        <Button
-          className="mt-2"
-          type="submit"
-          disabled={!isFormEnabled}
-        >
+        <Button className="mt-2" type="submit" disabled={!isFormEnabled}>
           Register
         </Button>
       </form>
     </div>
   );
 };
+
+export default RegisterView;
