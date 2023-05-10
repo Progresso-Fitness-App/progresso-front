@@ -9,7 +9,7 @@ interface ISessionService {
 
 export const sessionService: ISessionService = {
   login: (username, password) =>
-    POST<LoginResponse>('/login', {
+    POST<LoginResponse>('/api/login', {
       username,
       password
     })
