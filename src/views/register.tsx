@@ -1,6 +1,6 @@
 import { ChangeEvent, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerService } from '@/services';
+import { sessionService } from '@/services';
 
 export const RegisterView = (): JSX.Element => {
   const navigate = useNavigate();
@@ -31,11 +31,11 @@ export const RegisterView = (): JSX.Element => {
 
     if (!isFormEnabled) return;
 
-    registerService
+    sessionService
       .register(username, email, password)
       .then(({ statusCode, statusText, data }) => {
         if (data) {
-          'error' in data ? setError(data.error) : setError('Success');
+          'error' in data ? setError(data.error) : navigate('/dashboard');
         } else {
           setError(`${statusCode}: ${statusText}`);
         }

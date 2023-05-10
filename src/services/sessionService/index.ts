@@ -8,6 +8,12 @@ interface ISessionService {
     username: string,
     password: string
   ) => Promise<IAPIResponse<LoginResponse>>;
+
+  register: (
+    username: string,
+    email: string,
+    password: string
+  ) => Promise<IAPIResponse<RegisterResponse>>;
 }
 
 export const sessionService: ISessionService = {
@@ -16,17 +22,7 @@ export const sessionService: ISessionService = {
       username,
       password,
     }),
-};
 
-interface IRegisterService {
-  register: (
-    username: string,
-    email: string,
-    password: string
-  ) => Promise<IAPIResponse<RegisterResponse>>;
-}
-
-export const registerService: IRegisterService = {
   register: (username, email, password) =>
     POST<RegisterResponse>('/api/register', {
       username,
