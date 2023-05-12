@@ -1,14 +1,28 @@
-import { ChangeEvent, useId, useMemo, useState } from 'react';
+import {
+  ChangeEvent,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sessionService } from '@/services';
-import { TextInput, Button } from '@tremor/react';
+import { SessionResponse, sessionService } from '@/services';
+import { SessionContext } from '@/contexts';
+import { DASHBOARD } from '@/constants/routes';
 
 const LoginView = (): JSX.Element => {
+  const { session, setSession } = useContext(SessionContext);
+
   const navigate = useNavigate();
 
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | undefined>();
+
+  useEffect(() => {
+    session && navigate(`/${DASHBOARD}`);
+  }, [session, navigate]);
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) =>
     setUsername(e.target.value);
@@ -21,6 +35,11 @@ const LoginView = (): JSX.Element => {
     [username, password]
   );
 
+  const handleSuccessfulLogin = (data: SessionResponse) => {
+    setSession(data);
+    navigate(`/${DASHBOARD}`);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -30,7 +49,7 @@ const LoginView = (): JSX.Element => {
       .login(username, password)
       .then(({ statusCode, statusText, data }) => {
         if (data) {
-          'error' in data ? setError(data.error) : navigate('/dashboard');
+          'error' in data ? setError(data.error) : handleSuccessfulLogin(data);
         } else {
           setError(`${statusCode}: ${statusText}`);
         }

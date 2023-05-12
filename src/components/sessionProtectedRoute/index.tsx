@@ -11,12 +11,14 @@ export const SessionProtectedRoute = ({
   fallbackURL,
   children,
 }: ISessionProtectedRoute): JSX.Element => {
-  const { data } = useContext(SessionContext);
+  const { session, isLoading } = useContext(SessionContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    data || navigate(fallbackURL);
-  }, [data, fallbackURL, navigate]);
+    if (isLoading || session) return;
+    navigate(fallbackURL);
+  }, [session, isLoading, fallbackURL, navigate]);
 
-  return <>{data && children}</>;
+  return <>{session && children}</>;
 };
