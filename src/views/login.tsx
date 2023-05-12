@@ -47,7 +47,7 @@ const LoginView = (): JSX.Element => {
         <p className="absolute inset-x-0 top-0 bg-red-500 p-2">{error}</p>
       )}
 
-      <div className="mt-7 bg w-96">
+      <div className="mt-7 bg w-96 px-2">
         <div className="p-4 sm:p-7">
           <div className="text-center">
             <h1 className="block text-3xl font-bold text-white">Sign in</h1>
@@ -110,7 +110,7 @@ const LoginView = (): JSX.Element => {
                   <div className="relative">
                     <input
                       id={usernameId}
-                      className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="py-1 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                       onChange={handleUsernameChange}
                     />
                   </div>
@@ -127,7 +127,7 @@ const LoginView = (): JSX.Element => {
                     <input
                       type="password"
                       id={passwordId}
-                      className="py-3 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="py-1 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
                       onChange={handlePasswordChange}
                     />
                   </div>
