@@ -32,10 +32,10 @@ const router = createBrowserRouter([
 ]);
 
 const Loader = () => (
-  <div className="h-screen flex items-center justify-center">
+  <div className="h-screen flex items-center justify-center bg-[url(./mesh-548.png)] bg-cover">
     <svg
       aria-hidden="true"
-      className="w-12 h-12 text-gray-200 animate-spin fill-blue-600"
+      className="w-12 h-12 text-gray-200 animate-spin fill-white"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
