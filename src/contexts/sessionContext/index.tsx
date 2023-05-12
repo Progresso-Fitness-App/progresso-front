@@ -1,8 +1,21 @@
-import { createContext, useCallback, useEffect, useState } from 'react';
-import { SuccessfulUserDataResponse, sessionService } from '@/services';
+import {
+  Dispatch,
+  SetStateAction,
+  createContext,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+
+import { motion, AnimatePresence } from 'framer-motion';
+
+import { SessionResponse, sessionService } from '@/services';
+import { Loader } from '@/components/fullScreenLoader';
 
 export interface ISessionContext {
-  data?: SuccessfulUserDataResponse;
+  session?: SessionResponse;
+  isLoading: boolean;
+  setSession: Dispatch<SetStateAction<SessionResponse | undefined>>;
   refresh: () => Promise<void>;
 }
 
@@ -11,24 +24,54 @@ export interface ISessionProvider {
 }
 
 export const SessionContext = createContext<ISessionContext>({
+  isLoading: true,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  setSession: () => {},
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   refresh: async () => {},
 });
 
+const childrenAnimations = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.5,
+      staggerDirection: -1,
+    },
+  },
+};
+
+const loadingAnimations = {
+  shown: { opacity: 1 },
+  hide: {
+    opacity: 0,
+    transition: {
+      delayChildren: 0.5,
+      staggerDirection: 1,
+    },
+  },
+};
+
 export const SessionProvider = ({ children }: ISessionProvider) => {
-  const [data, setData] = useState<SuccessfulUserDataResponse | undefined>();
+  const [session, setSession] = useState<SessionResponse | undefined>();
+  const [isLoading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
+    setLoading(true);
+
     try {
-      const res = await sessionService.getUserData();
+      const res = await sessionService.getSession();
       if (!res.data || 'error' in res.data) {
-        setData(undefined);
+        setSession(undefined);
         return;
       }
 
-      setData(res.data);
+      setSession(res.data);
     } catch (e) {
-      setData(undefined);
+      setSession(undefined);
+    } finally {
+      setLoading(false);
     }
   }, []);
 
@@ -39,11 +82,31 @@ export const SessionProvider = ({ children }: ISessionProvider) => {
   return (
     <SessionContext.Provider
       value={{
+        isLoading,
+        session,
+        setSession,
         refresh,
-        data,
       }}
     >
-      {children}
+      <AnimatePresence>
+        {isLoading ? (
+          <motion.div
+            variants={loadingAnimations}
+            initial="shown"
+            animate="hide"
+          >
+            <Loader />
+          </motion.div>
+        ) : (
+          <motion.div
+            variants={childrenAnimations}
+            initial="hidden"
+            animate="show"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
     </SessionContext.Provider>
   );
 };

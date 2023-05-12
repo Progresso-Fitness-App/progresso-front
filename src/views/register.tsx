@@ -1,16 +1,29 @@
-import { ChangeEvent, useId, useMemo, useState } from 'react';
+import {
+  ChangeEvent,
+  useContext,
+  useEffect,
+  useId,
+  useMemo,
+  useState,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sessionService } from '@/services';
-import { TextInput, Button } from '@tremor/react';
+import { SessionResponse, sessionService } from '@/services';
+import { SessionContext } from '@/contexts';
+import { DASHBOARD } from '@/constants/routes';
 
 const RegisterView = (): JSX.Element => {
+  const { session, setSession } = useContext(SessionContext);
+
   const navigate = useNavigate();
 
-  //define variables
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | undefined>();
+
+  useEffect(() => {
+    session && navigate(`/${DASHBOARD}`);
+  }, [session, navigate]);
 
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) =>
     setUsername(e.target.value);
@@ -27,6 +40,11 @@ const RegisterView = (): JSX.Element => {
     [username, password, email]
   );
 
+  const handleSuccessfulRegister = (data: SessionResponse) => {
+    setSession(data);
+    navigate(`/${DASHBOARD}`);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -36,7 +54,9 @@ const RegisterView = (): JSX.Element => {
       .register(username, email, password)
       .then(({ statusCode, statusText, data }) => {
         if (data) {
-          'error' in data ? setError(data.error) : navigate('/dashboard');
+          'error' in data
+            ? setError(data.error)
+            : handleSuccessfulRegister(data);
         } else {
           setError(`${statusCode}: ${statusText}`);
         }
@@ -53,40 +73,6 @@ const RegisterView = (): JSX.Element => {
       {error && (
         <p className="absolute inset-x-0 top-0 bg-red-500 p-2">{error}</p>
       )}
-
-      {/* <form onSubmit={handleSubmit}>
-        <label className="text-sm text-gray-700" htmlFor={usernameId}>
-          Username
-        </label>
-        <TextInput
-          id={usernameId}
-          name="username"
-          placeholder="Username..."
-          onChange={handleUsernameChange}
-        />
-        <label className="text-sm text-gray-700" htmlFor={emailId}>
-          Email
-        </label>
-        <TextInput
-          id={emailId}
-          name="email"
-          placeholder="Email..."
-          onChange={handleEmailChange}
-        />
-        <label className="text-sm text-gray-700" htmlFor={passwordId}>
-          Password
-        </label>
-        <TextInput
-          id={passwordId}
-          type="password"
-          name="password"
-          placeholder="Password..."
-          onChange={handlePasswordChange}
-        />
-        <Button className="mt-2" type="submit" disabled={!isFormEnabled}>
-          Register
-        </Button>
-      </form> */}
 
       <div className="mt-7 bg w-96 px-2">
         <div className="p-4 sm:p-7">
