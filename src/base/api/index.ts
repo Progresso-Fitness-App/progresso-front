@@ -25,6 +25,11 @@ export const GET = async <T>(
   options: Partial<RequestInit> = {}
 ): Promise<IAPIResponse<T>> => doRequest<T>('GET', location, options);
 
+export const DELETE = async <T>(
+  location: URL | string,
+  options: Partial<RequestInit> = {}
+): Promise<IAPIResponse<T>> => doRequest<T>('DELETE', location, options);
+
 export const POST = async <T>(
   location: URL | string,
   body: BodyType,

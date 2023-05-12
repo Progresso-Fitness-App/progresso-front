@@ -1,7 +1,7 @@
 import { ChangeEvent, useId, useMemo, useState } from 'react';
+import { TextInput, Button } from '@tremor/react';
 import { useNavigate } from 'react-router-dom';
 import { sessionService } from '@/services';
-import { TextInput, Button } from '@tremor/react';
 
 const RegisterView = (): JSX.Element => {
   const navigate = useNavigate();

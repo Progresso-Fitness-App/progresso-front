@@ -1,9 +1,5 @@
 import type { IAPIResponse } from '@/base/api/types';
-import type {
-  LoginResponse,
-  RegisterResponse,
-  UserDataResponse,
-} from './types';
+import type { SessionResponse } from './types';
 
 import { GET, POST } from '@/base/api';
 
@@ -11,30 +7,30 @@ interface ISessionService {
   login: (
     username: string,
     password: string
-  ) => Promise<IAPIResponse<LoginResponse>>;
+  ) => Promise<IAPIResponse<SessionResponse>>;
 
   register: (
     username: string,
     email: string,
     password: string
-  ) => Promise<IAPIResponse<RegisterResponse>>;
+  ) => Promise<IAPIResponse<SessionResponse>>;
 
-  getUserData: () => Promise<IAPIResponse<UserDataResponse>>;
+  getSession: () => Promise<IAPIResponse<SessionResponse>>;
 }
 
 export const sessionService: ISessionService = {
   login: (username, password) =>
-    POST<LoginResponse>('/api/login', {
+    POST<SessionResponse>('/api/session/login', {
       username,
       password,
     }),
 
   register: (username, email, password) =>
-    POST<RegisterResponse>('/api/register', {
+    POST<SessionResponse>('/api/session/register', {
       username,
       email,
       password,
     }),
 
-  getUserData: () => GET<UserDataResponse>('/api/me'),
+  getSession: () => GET<SessionResponse>('/api/session'),
 };
