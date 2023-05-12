@@ -96,7 +96,7 @@ const RegisterView = (): JSX.Element => {
               Already have an account?{' '}
               <a
                 className="text-white decoration-2 hover:underline font-medium"
-                href="/register"
+                href="/login"
               >
                 Sign in here
               </a>
