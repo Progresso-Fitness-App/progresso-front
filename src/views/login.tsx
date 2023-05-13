@@ -63,7 +63,7 @@ const LoginView = (): JSX.Element => {
 
   return (
     <div className="h-screen flex items-center justify-center bg-[url(./mesh-548.avif)] bg-cover">
-      {error && <ErrorBar error={error}></ErrorBar>}
+      {error && <ErrorBar>{error}</ErrorBar>}
 
       <div className="mt-7 bg w-96 px-2">
         <div className="p-4 sm:p-7">
