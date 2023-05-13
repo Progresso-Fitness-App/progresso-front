@@ -7,9 +7,10 @@ import {
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { SessionResponse, sessionService } from '@/services';
-import { SessionContext } from '@/contexts';
+import { sessionService } from '@/services';
 import { DASHBOARD } from '@/constants/routes';
+import { TSession } from '@/types/session';
+import { SessionContext } from '@/contexts';
 import { ErrorBar } from '@/components/errorBar';
 
 const LoginView = (): JSX.Element => {
@@ -36,7 +37,7 @@ const LoginView = (): JSX.Element => {
     [username, password]
   );
 
-  const handleSuccessfulLogin = (data: SessionResponse) => {
+  const handleSuccessfulLogin = (data: TSession) => {
     setSession(data);
     navigate(`/${DASHBOARD}`);
   };
@@ -48,14 +49,8 @@ const LoginView = (): JSX.Element => {
 
     sessionService
       .login(username, password)
-      .then(({ statusCode, statusText, data }) => {
-        if (data) {
-          'error' in data ? setError(data.error) : handleSuccessfulLogin(data);
-        } else {
-          setError(`${statusCode}: ${statusText}`);
-        }
-      })
-      .catch((e) => setError(e.message));
+      .then(handleSuccessfulLogin)
+      .catch(({ message }) => setError(message));
   };
 
   const usernameId = useId(),

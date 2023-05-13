@@ -6,10 +6,12 @@ import {
   useMemo,
   useState,
 } from 'react';
+
 import { useNavigate } from 'react-router-dom';
-import { SessionResponse, sessionService } from '@/services';
+import { sessionService } from '@/services';
 import { SessionContext } from '@/contexts';
 import { DASHBOARD } from '@/constants/routes';
+import { TSession } from '@/types/session';
 import { ErrorBar } from '@/components/errorBar';
 
 const RegisterView = (): JSX.Element => {
@@ -41,7 +43,7 @@ const RegisterView = (): JSX.Element => {
     [username, password, email]
   );
 
-  const handleSuccessfulRegister = (data: SessionResponse) => {
+  const handleSuccessfulRegister = (data: TSession) => {
     setSession(data);
     navigate(`/${DASHBOARD}`);
   };
@@ -53,16 +55,8 @@ const RegisterView = (): JSX.Element => {
 
     sessionService
       .register(username, email, password)
-      .then(({ statusCode, statusText, data }) => {
-        if (data) {
-          'error' in data
-            ? setError(data.error)
-            : handleSuccessfulRegister(data);
-        } else {
-          setError(`${statusCode}: ${statusText}`);
-        }
-      })
-      .catch((e) => setError(e.message));
+      .then(handleSuccessfulRegister)
+      .catch(({ message }) => setError(message));
   };
 
   const usernameId = useId(),

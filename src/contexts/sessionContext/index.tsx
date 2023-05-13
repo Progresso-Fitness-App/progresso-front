@@ -1,3 +1,5 @@
+import type { TSession } from '@/types/session';
+
 import {
   Dispatch,
   SetStateAction,
@@ -8,14 +10,13 @@ import {
 } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
-
-import { SessionResponse, sessionService } from '@/services';
+import { sessionService } from '@/services';
 import { Loader } from '@/components/fullScreenLoader';
 
 export interface ISessionContext {
-  session?: SessionResponse;
+  session?: TSession;
   isLoading: boolean;
-  setSession: Dispatch<SetStateAction<SessionResponse | undefined>>;
+  setSession: Dispatch<SetStateAction<TSession | undefined>>;
   refresh: () => Promise<void>;
 }
 
@@ -54,25 +55,17 @@ const loadingAnimations = {
 };
 
 export const SessionProvider = ({ children }: ISessionProvider) => {
-  const [session, setSession] = useState<SessionResponse | undefined>();
+  const [session, setSession] = useState<TSession | undefined>();
   const [isLoading, setLoading] = useState(true);
 
   const refresh = useCallback(async () => {
     setLoading(true);
 
-    try {
-      const res = await sessionService.getSession();
-      if (!res.data || 'error' in res.data) {
-        setSession(undefined);
-        return;
-      }
-
-      setSession(res.data);
-    } catch (e) {
-      setSession(undefined);
-    } finally {
-      setLoading(false);
-    }
+    sessionService
+      .getSession()
+      .then(setSession)
+      .catch(() => setSession(undefined))
+      .finally(() => setLoading(false));
   }, []);
 
   useEffect(() => {
