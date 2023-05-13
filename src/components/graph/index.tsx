@@ -21,7 +21,7 @@ export const Graph = ({ stat }: IGraph): JSX.Element => {
           push(Math.random() * 256);
         }}
       >
-        ADD shit
+        ADD
       </button>
     </div>
   );
