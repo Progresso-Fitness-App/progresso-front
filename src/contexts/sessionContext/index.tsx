@@ -2,6 +2,7 @@ import type { TSession } from '@/types/session';
 
 import {
   Dispatch,
+  ReactNode,
   SetStateAction,
   createContext,
   useCallback,
@@ -21,7 +22,7 @@ export interface ISessionContext {
 }
 
 export interface ISessionProvider {
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 export const SessionContext = createContext<ISessionContext>({
