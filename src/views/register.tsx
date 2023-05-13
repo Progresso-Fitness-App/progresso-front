@@ -12,17 +12,17 @@ import { sessionService } from '@/services';
 import { SessionContext } from '@/contexts';
 import { DASHBOARD } from '@/constants/routes';
 import { TSession } from '@/types/session';
-import { ErrorBar } from '@/components/errorBar';
+import { ErrorContext } from '@/contexts/errorContext';
 
 const RegisterView = (): JSX.Element => {
   const { session, setSession } = useContext(SessionContext);
+  const { setError } = useContext(ErrorContext);
 
   const navigate = useNavigate();
 
   const [username, setUsername] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string | undefined>();
 
   useEffect(() => {
     session && navigate(`/${DASHBOARD}`);
@@ -56,7 +56,7 @@ const RegisterView = (): JSX.Element => {
     sessionService
       .register(username, email, password)
       .then(handleSuccessfulRegister)
-      .catch(({ message }) => setError(message));
+      .catch(setError);
   };
 
   const usernameId = useId(),
@@ -65,8 +65,6 @@ const RegisterView = (): JSX.Element => {
 
   return (
     <div className="h-screen flex items-center justify-center bg-[url(./mesh-548.avif)] bg-cover">
-      {error && <ErrorBar>{error}</ErrorBar>}
-
       <div className="mt-7 bg w-96 px-2">
         <div className="p-4 sm:p-7">
           <div className="text-center">

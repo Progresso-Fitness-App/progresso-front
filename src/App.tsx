@@ -4,6 +4,7 @@ import { DASHBOARD, LOGIN, REGISTER } from './constants/routes';
 import { SessionProvider } from './contexts';
 import { SessionProtectedRoute } from './components';
 import { Loader } from './components/fullScreenLoader';
+import { ErrorProvider } from './contexts/errorContext';
 
 const LoginView = lazy(() => import('@/views/login'));
 const RegisterView = lazy(() => import('@/views/register'));
@@ -36,7 +37,9 @@ function App() {
   return (
     <Suspense fallback={<Loader />}>
       <SessionProvider>
-        <RouterProvider router={router} />
+        <ErrorProvider>
+          <RouterProvider router={router} />
+        </ErrorProvider>
       </SessionProvider>
     </Suspense>
   );
