@@ -1,36 +1,31 @@
-import type { IAPIResponse } from '@/base/api/types';
-import type { SessionResponse } from './types';
-
 import { GET, POST } from '@/base/api';
+import { TSession } from '@/types/session';
 
 interface ISessionService {
-  login: (
-    username: string,
-    password: string
-  ) => Promise<IAPIResponse<SessionResponse>>;
+  login: (username: string, password: string) => Promise<TSession>;
 
   register: (
     username: string,
     email: string,
     password: string
-  ) => Promise<IAPIResponse<SessionResponse>>;
+  ) => Promise<TSession>;
 
-  getSession: () => Promise<IAPIResponse<SessionResponse>>;
+  getSession: () => Promise<TSession>;
 }
 
 export const sessionService: ISessionService = {
   login: (username, password) =>
-    POST<SessionResponse>('/api/session/login', {
+    POST<TSession>('/api/session/login', {
       username,
       password,
     }),
 
   register: (username, email, password) =>
-    POST<SessionResponse>('/api/session/register', {
+    POST<TSession>('/api/session/register', {
       username,
       email,
       password,
     }),
 
-  getSession: () => GET<SessionResponse>('/api/session'),
+  getSession: () => GET<TSession>('/api/session'),
 };
