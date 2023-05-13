@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { SessionResponse, sessionService } from '@/services';
 import { SessionContext } from '@/contexts';
 import { DASHBOARD } from '@/constants/routes';
+import { ErrorBar } from '@/components/errorBar';
 
 const LoginView = (): JSX.Element => {
   const { session, setSession } = useContext(SessionContext);
@@ -61,10 +62,8 @@ const LoginView = (): JSX.Element => {
     passwordId = useId();
 
   return (
-    <div className="h-screen flex items-center justify-center bg-[url(./mesh-548.png)] bg-cover">
-      {error && (
-        <p className="absolute inset-x-0 top-0 bg-red-500 p-2">{error}</p>
-      )}
+    <div className="h-screen flex items-center justify-center bg-[url(./mesh-548.avif)] bg-cover">
+      {error && <ErrorBar>{error}</ErrorBar>}
 
       <div className="mt-7 bg w-96 px-2">
         <div className="p-4 sm:p-7">
@@ -129,7 +128,7 @@ const LoginView = (): JSX.Element => {
                   <div className="relative">
                     <input
                       id={usernameId}
-                      className="py-1 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="py-1 px-4 block w-full border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all"
                       onChange={handleUsernameChange}
                     />
                   </div>
@@ -146,7 +145,7 @@ const LoginView = (): JSX.Element => {
                     <input
                       type="password"
                       id={passwordId}
-                      className="py-1 px-4 block w-full border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500"
+                      className="py-1 px-4 block w-full border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all"
                       onChange={handlePasswordChange}
                     />
                   </div>
@@ -172,7 +171,7 @@ const LoginView = (): JSX.Element => {
 
                 <button
                   type="submit"
-                  className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all text-sm backdrop-blur-sm"
+                  className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all transition-all text-sm disabled:opacity-70"
                   disabled={!isFormEnabled}
                 >
                   Sign in
