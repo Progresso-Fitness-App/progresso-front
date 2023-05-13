@@ -1,9 +1,16 @@
 import { Graph } from '@/components/graph';
 import { SessionContext } from '@/contexts';
 import { useContext } from 'react';
+import { sessionService } from '@/services';
 
 const DashboardView = (): JSX.Element => {
-  const { session } = useContext(SessionContext);
+  const { session, setSession } = useContext(SessionContext);
+
+  const handleLogout = async () => {
+    await sessionService.logout().catch(() => null);
+
+    setSession(undefined);
+  };
 
   return (
     <>
@@ -12,6 +19,7 @@ const DashboardView = (): JSX.Element => {
           <Graph key={stat._id} stat={stat}></Graph>
         ))}
       </div>
+      <button onClick={handleLogout}>logout</button>
     </>
   );
 };

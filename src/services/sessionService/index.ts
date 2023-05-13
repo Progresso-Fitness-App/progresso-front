@@ -1,4 +1,4 @@
-import { GET, POST } from '@/base/api';
+import { GET, POST, DELETE } from '@/base/api';
 import { TSession } from '@/types/session';
 
 interface ISessionService {
@@ -11,21 +11,25 @@ interface ISessionService {
   ) => Promise<TSession>;
 
   getSession: () => Promise<TSession>;
+
+  logout: () => Promise<Record<string, never>>;
 }
 
 export const sessionService: ISessionService = {
   login: (username, password) =>
-    POST<TSession>('/api/session/login', {
+    POST('/api/session/login', {
       username,
       password,
     }),
 
   register: (username, email, password) =>
-    POST<TSession>('/api/session/register', {
+    POST('/api/session/register', {
       username,
       email,
       password,
     }),
 
-  getSession: () => GET<TSession>('/api/session'),
+  getSession: () => GET('/api/session'),
+
+  logout: () => DELETE('/api/session'),
 };

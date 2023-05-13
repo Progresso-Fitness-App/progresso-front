@@ -26,7 +26,7 @@ const router = createBrowserRouter([
   {
     path: DASHBOARD,
     element: (
-      <SessionProtectedRoute fallbackURL={LOGIN}>
+      <SessionProtectedRoute fallbackURL={`/${LOGIN}`}>
         <DashboardView />
       </SessionProtectedRoute>
     ),
