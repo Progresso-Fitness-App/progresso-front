@@ -152,7 +152,7 @@ const LoginView = (): JSX.Element => {
 
                 <button
                   type="submit"
-                  className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all transition-all text-sm disabled:opacity-70"
+                  className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm disabled:opacity-70"
                   disabled={!isFormEnabled}
                 >
                   Sign in

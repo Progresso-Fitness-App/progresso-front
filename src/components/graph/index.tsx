@@ -28,13 +28,15 @@ export const Graph = ({ stat }: IGraph): JSX.Element => {
   };
 
   return (
-    <div className="max-w-[400px] block p-2 flex flex-col gap-2">
+    <div className="block p-2 flex flex-col gap-2 bg rounded-xl">
       <AreaChart
         data={graph}
         index={stat.name}
         categories={[stat.name]}
         showAnimation
         curveType="natural"
+        showGradient
+        showGridLines={false}
       ></AreaChart>
       <DateRangePicker
         maxDate={todayEnd}
