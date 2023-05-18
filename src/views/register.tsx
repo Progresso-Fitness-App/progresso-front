@@ -143,7 +143,6 @@ const RegisterView = (): JSX.Element => {
                   </label>
                   <div className="relative">
                     <input
-                      type="password"
                       id={emailId}
                       className="py-1 px-4 block w-full border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all"
                       onChange={handleEmailChange}
@@ -188,7 +187,7 @@ const RegisterView = (): JSX.Element => {
 
                 <button
                   type="submit"
-                  className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all transition-all text-sm disabled:opacity-70"
+                  className="py-3 px-4 inline-flex justify-center items-center gap-2 rounded-md border border-transparent font-semibold bg-blue-600 text-white hover:bg-blue-700 focus:ring-2 focus:ring-offset-2 focus:ring-offset-white focus:ring-blue-600 transition-all text-sm disabled:opacity-70"
                   disabled={!isFormEnabled}
                 >
                   Sign up
