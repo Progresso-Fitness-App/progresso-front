@@ -1,7 +1,10 @@
 export const Navbar = (): JSX.Element => {
   return (
     <div className="py-2 px-4 flex justify-between absolute inset-x-0 top-0 bg rounded-none text-white">
-      <h1 className="font-medium text-2xl">Progresso</h1>
+      <img
+        className="h-20 mr-3 cursor-pointer"
+        src="/src/assets/logo.png"
+      ></img>
       <div className="flex justify-center items-center gap-2">
         <PlusIcon />
         <CalendarIcon />
