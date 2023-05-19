@@ -1,10 +1,12 @@
 export const Navbar = (): JSX.Element => {
   return (
     <div className="py-2 px-4 flex justify-between absolute inset-x-0 top-0 bg rounded-none text-white">
-      <img
-        className="h-20 mr-3 cursor-pointer"
-        src="/src/assets/logo.png"
-      ></img>
+      <a href="/dashboard">
+        <img
+          className="h-20 mr-3 cursor-pointer"
+          src="/src/assets/logo.png"
+        ></img>
+      </a>
       <div className="flex justify-center items-center gap-2">
         <PlusIcon />
         <CalendarIcon />
@@ -18,20 +20,22 @@ export const Navbar = (): JSX.Element => {
 
 const UserIcon = () => {
   return (
-    <svg
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-      className="h-10 w-10 hover:bg-black/20 p-1 rounded-lg"
-    >
-      <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
-        d="M17.294 7.29105C17.294 10.2281 14.9391 12.5831 12 12.5831C9.0619 12.5831 6.70601 10.2281 6.70601 7.29105C6.70601 4.35402 9.0619 2 12 2C14.9391 2 17.294 4.35402 17.294 7.29105ZM12 22C7.66237 22 4 21.295 4 18.575C4 15.8539 7.68538 15.1739 12 15.1739C16.3386 15.1739 20 15.8789 20 18.599C20 21.32 16.3146 22 12 22Z"
-        fill="white"
-      />
-    </svg>
+    <a href="/profile">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-10 w-10 hover:bg-black/20 p-1 rounded-lg cursor-pointer"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M17.294 7.29105C17.294 10.2281 14.9391 12.5831 12 12.5831C9.0619 12.5831 6.70601 10.2281 6.70601 7.29105C6.70601 4.35402 9.0619 2 12 2C14.9391 2 17.294 4.35402 17.294 7.29105ZM12 22C7.66237 22 4 21.295 4 18.575C4 15.8539 7.68538 15.1739 12 15.1739C16.3386 15.1739 20 15.8789 20 18.599C20 21.32 16.3146 22 12 22Z"
+          fill="white"
+        />
+      </svg>
+    </a>
   );
 };
 
@@ -42,7 +46,7 @@ const PlusIcon = () => {
       height="24"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
     >
       <path
         fill-rule="evenodd"
@@ -61,7 +65,7 @@ const SettingsIcon = () => {
       height="24"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
     >
       <path
         fill-rule="evenodd"
@@ -79,7 +83,7 @@ const CategoryIcon = () => {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -98,7 +102,7 @@ const CalendarIcon = () => {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
