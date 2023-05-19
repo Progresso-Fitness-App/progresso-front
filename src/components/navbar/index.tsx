@@ -25,7 +25,7 @@ const PlusIcon = () => {
       height="24"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
     >
       <path
         fill-rule="evenodd"
@@ -44,7 +44,7 @@ const SettingsIcon = () => {
       height="24"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
     >
       <path
         fill-rule="evenodd"
@@ -62,7 +62,7 @@ const CategoryIcon = () => {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -81,7 +81,7 @@ const CalendarIcon = () => {
       width="24"
       height="24"
       viewBox="0 0 24 24"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -102,7 +102,7 @@ const UserIcon = () => {
       height="24"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-10 w-10 hover:bg-black/20 p-1 rounded-lg"
+      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
     >
       <path
         fill-rule="evenodd"
