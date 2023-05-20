@@ -9,9 +9,10 @@ import {
 
 export interface IGraph {
   stat: TUserStat;
+  isDouble?: boolean;
 }
 
-export const Graph = ({ stat }: IGraph): JSX.Element => {
+export const Graph = ({ stat, isDouble }: IGraph): JSX.Element => {
   const oneYearAgo = new Date();
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
   const todayEnd = new Date();
@@ -28,7 +29,11 @@ export const Graph = ({ stat }: IGraph): JSX.Element => {
   };
 
   return (
-    <div className="block p-2 flex flex-col gap-2 bg rounded-xl">
+    <div
+      className={`p-2 flex flex-col gap-2 rounded-xl ${
+        isDouble && 'col-span-2'
+      }`}
+    >
       <AreaChart
         data={graph}
         index={stat.name}
@@ -37,8 +42,9 @@ export const Graph = ({ stat }: IGraph): JSX.Element => {
         curveType="natural"
         showGradient
         showGridLines={false}
+        color="white"
       ></AreaChart>
-      <DateRangePicker
+      {/* <DateRangePicker
         maxDate={todayEnd}
         minDate={oneYearAgo}
         onValueChange={handleRangeChange}
@@ -49,7 +55,7 @@ export const Graph = ({ stat }: IGraph): JSX.Element => {
         }}
       >
         ADD
-      </Button>
+      </Button> */}
     </div>
   );
 };
