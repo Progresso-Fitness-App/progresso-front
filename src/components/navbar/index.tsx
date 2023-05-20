@@ -102,7 +102,7 @@ const UserIcon = () => {
       height="24"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
-      className="h-10 w-10 hover:bg-black/20 p-2 rounded-lg cursor-pointer"
+      className="h-10 w-10 hover:bg-black/20 p-1 rounded-lg"
     >
       <path
         fill-rule="evenodd"

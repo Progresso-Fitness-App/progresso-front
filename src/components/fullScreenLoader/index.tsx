@@ -1,5 +1,5 @@
 export const Loader = () => (
-  <div className="h-screen flex items-center justify-center bg-cover">
+  <div className="h-screen flex items-center justify-center bg-cover ">
     <svg
       aria-hidden="true"
       className="w-12 h-12 text-gray-200 animate-spin fill-white"
@@ -16,6 +16,6 @@ export const Loader = () => (
         fill="currentFill"
       />
     </svg>
-    <span className="sr-only">Loading...</span>
+    <span className="sr-only ">Loading...</span>
   </div>
 );

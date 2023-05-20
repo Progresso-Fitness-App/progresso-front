@@ -13,7 +13,7 @@ const Dropdown = ({ icon }: { icon: ReactNode }) => {
           className="rounded-md mt-2 mr-2 will-change-[opacity,transform] data-[side=top]:animate-slideDownAndFade data-[side=right]:animate-slideLeftAndFade data-[side=bottom]:animate-slideUpAndFade data-[side=left]:animate-slideRightAndFade"
           sideOffset={5}
         >
-          <div className="bg rounded-md h-96 w-64">
+          <div className="bg rounded-md h-96 w-64 ">
             <h1 className="text-white">Username: etc.</h1>
           </div>
         </DropdownMenu.Content>
