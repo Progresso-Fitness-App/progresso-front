@@ -8,23 +8,24 @@ import {
 } from 'react';
 
 import { motion, AnimatePresence } from 'framer-motion';
-import { ErrorBar } from '@/components/errorBar';
 
-export interface ISessionContext {
+import { ErrorBar } from '@/components';
+
+export interface IErrorContext {
   error?: string;
   setError: <T extends Error & { message: string }>(error: string | T) => void;
 }
 
-export const ErrorContext = createContext<ISessionContext>({
+export const ErrorContext = createContext<IErrorContext>({
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setError: () => {},
 });
 
-export interface ISessionProvider {
+export interface IErrorProvider {
   children: ReactNode;
 }
 
-export const ErrorProvider = ({ children }: ISessionProvider) => {
+export const ErrorProvider = ({ children }: IErrorProvider) => {
   const [error, setError] = useState<string | undefined>();
 
   const errorTimeout = useRef<ReturnType<typeof setTimeout> | undefined>();
@@ -61,7 +62,10 @@ export const ErrorProvider = ({ children }: ISessionProvider) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           >
-            <ErrorBar>{error}</ErrorBar>
+            <ErrorBar
+              errorMessage={error}
+              onClose={() => setError(undefined)}
+            />
           </motion.div>
         )}
       </AnimatePresence>

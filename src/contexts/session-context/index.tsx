@@ -12,7 +12,7 @@ import {
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { sessionService } from '@/services';
-import { Loader } from '@/components/fullScreenLoader';
+import { LoadingOverlay } from '@mantine/core';
 
 export interface ISessionContext {
   session?: TSession;
@@ -89,7 +89,7 @@ export const SessionProvider = ({ children }: ISessionProvider) => {
             initial="shown"
             animate="hide"
           >
-            <Loader />
+            <LoadingOverlay visible />
           </motion.div>
         ) : (
           <motion.div

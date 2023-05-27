@@ -1,1 +1,1 @@
-export * from './sessionService';
+export * from './session-service';

@@ -3,8 +3,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { DASHBOARD, LOGIN, REGISTER } from './constants/routes';
 import { SessionProvider } from './contexts';
 import { SessionProtectedRoute } from './components';
-import { Loader } from './components/fullScreenLoader';
-import { ErrorProvider } from './contexts/errorContext';
+import { ErrorProvider } from './contexts/error-context';
+import { LoadingOverlay, MantineProvider } from '@mantine/core';
 
 const LoginView = lazy(() => import('@/views/login'));
 const RegisterView = lazy(() => import('@/views/register'));
@@ -35,13 +35,15 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <Suspense fallback={<Loader />}>
-      <SessionProvider>
-        <ErrorProvider>
-          <RouterProvider router={router} />
-        </ErrorProvider>
-      </SessionProvider>
-    </Suspense>
+    <MantineProvider withGlobalStyles withNormalizeCSS>
+      <Suspense fallback={<LoadingOverlay visible />}>
+        <SessionProvider>
+          <ErrorProvider>
+            <RouterProvider router={router} />
+          </ErrorProvider>
+        </SessionProvider>
+      </Suspense>
+    </MantineProvider>
   );
 }
 

@@ -1,1 +1,2 @@
-export * from './sessionContext';
+export * from './session-context';
+export * from './error-context';
