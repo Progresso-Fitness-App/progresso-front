@@ -1,4 +1,4 @@
-import { statsService } from '@/services/statsService';
+import { statsService } from '@/services';
 import { TStatGraph, TUserStat } from '@/types/stats';
 import { useCallback, useEffect, useState } from 'react';
 
